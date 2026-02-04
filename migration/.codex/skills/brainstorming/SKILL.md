@@ -34,7 +34,8 @@ Start by understanding the current project context, then ask questions one at a 
 - Write the validated design to `migration/docs/plans/YYYY-MM-DD-<topic>-design.md`
 
 **Implementation setup:**
-- Ask: "Ready to write the implementation plan?"
+- Ask: "Ready to set up an isolated workspace and write the implementation plan?"
+- Use `superpowers-using-git-worktrees` to create isolated workspace when implementation will follow.
 - Use the `superpowers-writing-plans` skill to create a decision-complete execution plan
 
 ## Key Principles

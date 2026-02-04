@@ -78,7 +78,7 @@ Expected: [specific pass result]
 
 After saving the plan, offer execution modes:
 
-1. **Sequential execution (this session)** - execute first 3 tasks, report results, wait for feedback.
-2. **Sequential execution (separate session)** - load the same plan and execute in the same batched checkpoint style.
+1. **`superpowers-executing-plans` (this session)** - execute first 3 tasks, report results, wait for feedback.
+2. **`superpowers-executing-plans` (separate session)** - load the same plan and execute in the same batched checkpoint style.
 
 For both modes: do not skip verifications, and stop immediately when blocked.
