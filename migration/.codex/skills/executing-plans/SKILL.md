@@ -79,3 +79,6 @@ Required workflow skills:
 - `superpowers-writing-plans` - provides the plan structure
 - `superpowers-requesting-code-review` - review each batch before moving forward
 - `superpowers-finishing-a-development-branch` - closes out work safely
+
+Alternative workflow:
+- `superpowers-subagent-driven-development` - per-task review loop instead of batched checkpoints

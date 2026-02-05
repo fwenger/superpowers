@@ -78,7 +78,7 @@ Expected: [specific pass result]
 
 After saving the plan, offer execution modes:
 
-1. **`superpowers-executing-plans` (this session)** - execute first 3 tasks, report results, wait for feedback.
-2. **`superpowers-executing-plans` (separate session)** - load the same plan and execute in the same batched checkpoint style.
+1. **`superpowers-subagent-driven-development` (this session)** - task-by-task execution with per-task review gates.
+2. **`superpowers-executing-plans` (same or separate session)** - execute in batched checkpoints.
 
 For both modes: do not skip verifications, and stop immediately when blocked.

@@ -36,7 +36,7 @@ If a loaded skill contains checklist-style steps, track them explicitly with `up
 When multiple skills could apply, use this order:
 
 1. Process skills first (superpowers-brainstorming, superpowers-systematic-debugging)
-2. Implementation skills second (superpowers-writing-plans, superpowers-executing-plans, superpowers-using-git-worktrees, superpowers-test-driven-development, superpowers-verification-before-completion)
+2. Implementation skills second (superpowers-writing-plans, superpowers-executing-plans, superpowers-subagent-driven-development, superpowers-using-git-worktrees, superpowers-dispatching-parallel-agents, superpowers-test-driven-development, superpowers-verification-before-completion)
 3. Review skills as checkpoint gates (superpowers-requesting-code-review, superpowers-receiving-code-review)
 4. Completion/meta skills as closeout tools (superpowers-finishing-a-development-branch, superpowers-writing-skills)
 
