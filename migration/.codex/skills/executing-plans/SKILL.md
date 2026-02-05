@@ -35,8 +35,10 @@ For each task:
 ### Step 3: Report
 
 When batch completes:
+- Run `superpowers-requesting-code-review` on the batch range.
 - Report what changed.
 - Report verification results.
+- Report review findings and fixes.
 - Say: "Ready for feedback."
 
 ### Step 4: Continue
@@ -75,4 +77,5 @@ Do not guess through blockers.
 Required workflow skills:
 - `superpowers-using-git-worktrees` - setup isolated workspace
 - `superpowers-writing-plans` - provides the plan structure
+- `superpowers-requesting-code-review` - review each batch before moving forward
 - `superpowers-finishing-a-development-branch` - closes out work safely
