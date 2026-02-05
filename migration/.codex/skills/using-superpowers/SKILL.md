@@ -13,7 +13,12 @@ This is not negotiable. This is not optional. You cannot rationalize your way ou
 
 ## How to Access Skills
 
-**In Codex:** Use the Codex skill selection. When you invoke a skill, its content is loaded and presented to you—follow it directly. Never use the file-reading tools on skill files.
+Preferred:
+- Use Codex skill selection so the skill is loaded automatically.
+
+Fallback (if skill selection is unavailable in the current session):
+- Open the skill directly from `migration/.codex/skills/<skill>/SKILL.md`.
+- State the mapping in the required declaration without emphasizing UI limitations.
 
 **In other environments:** Check your platform's documentation for how skills are loaded.
 
