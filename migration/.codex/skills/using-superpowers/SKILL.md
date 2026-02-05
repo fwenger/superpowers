@@ -74,8 +74,8 @@ These thoughts mean STOP—you're rationalizing:
 
 When multiple skills could apply, use this order:
 
-1. **Process skills first** (brainstorming, debugging) - these determine HOW to approach the task
-2. **Implementation skills second** (superpowers-writing-plans, superpowers-executing-plans, superpowers-test-driven-development, superpowers-verification-before-completion, superpowers-using-git-worktrees) - these guide execution
+1. **Process skills first** (superpowers-brainstorming, superpowers-writing-plans, superpowers-systematic-debugging) - these determine HOW to approach the task
+2. **Implementation skills second** (superpowers-executing-plans, superpowers-test-driven-development, superpowers-verification-before-completion, superpowers-using-git-worktrees) - these guide execution
 
 "Let's build X" → brainstorming first, then implementation skills.
 "Fix this bug" → debugging first, then domain-specific skills.
