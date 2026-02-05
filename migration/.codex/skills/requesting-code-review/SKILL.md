@@ -5,95 +5,99 @@ description: Use when completing major tasks or before merge to verify implement
 
 # Requesting Code Review
 
-## Overview
-
-Request structured review early so defects are caught before they compound.
+Request independent review early so issues are caught before they cascade.
 
 **Core principle:** Review early, review often.
 
 ## When to Request Review
 
-Mandatory:
-- After each implementation batch in `superpowers-executing-plans`
-- After major feature completion
-- Before merge or PR finalization
+**Mandatory:**
+- After each task in subagent-driven development
+- After completing major feature
+- Before merge to main
 
-Optional but useful:
-- When stuck on design/quality tradeoffs
-- Before large refactors
-- After complex bug fixes
+**Optional but valuable:**
+- When stuck (fresh perspective)
+- Before refactoring (baseline check)
+- After fixing complex bug
 
-## Review Request Procedure
+## Review Modes
 
-### 1) Define review scope
+### Mode A (Preferred): New Thread Reviewer
 
-Capture commit range and requirements:
+Use a separate thread/new agent as reviewer and run `superpowers-code-review` there.
 
+Why preferred:
+- Independent reviewer perspective
+- Better chance to catch implementer blind spots
+- Closer to original subagent-review intent
+
+### Mode B (Fallback): Same Thread Self-Review
+
+Use only when a separate reviewer thread is not available.
+
+Required:
+- Explicitly state reduced independence
+- Follow `superpowers-code-review` checklist exactly
+- Treat findings conservatively
+
+## How to Request (Mode A)
+
+**1. Get git SHAs:**
 ```bash
-BASE_SHA=$(git rev-parse HEAD~1)
+BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
 HEAD_SHA=$(git rev-parse HEAD)
 ```
 
-Record:
-- What was implemented
-- Which requirements/plan items this should satisfy
-- Any known risks
+**2. Start a reviewer thread and paste review prompt:**
 
-### 2) Run review mode
+Use template at `reviewer-prompt.md`, fill placeholders:
 
-Use the strongest available mode:
+**Placeholders:**
+- `{WHAT_WAS_IMPLEMENTED}` - What you just built
+- `{PLAN_OR_REQUIREMENTS}` - What it should do
+- `{BASE_SHA}` - Starting commit
+- `{HEAD_SHA}` - Ending commit
+- `{DESCRIPTION}` - Brief summary
 
-1. **Delegated review** (if verified capability exists): assign a dedicated reviewer agent to inspect the commit range.
-2. **Direct review** (fallback): perform a strict self-review pass using the checklist below.
+**2.5 Present the filled prompt to Felix to copy/paste into a new thread:**
+- Provide the fully filled prompt text directly in chat.
+- Instruct Felix to paste it into a new Codex thread/agent.
 
-### 3) Apply review checklist
+**3. Process reviewer feedback:**
+- Use `superpowers-receiving-code-review` for feedback handling, pushback, and fix ordering.
 
-For the selected range, check:
-- Requirement/spec compliance
-- Behavioral regressions
-- Missing or weak tests
-- Error handling and edge cases
-- Security/privacy risks
-- Performance footguns
-- Maintainability/readability
+## Integration with Workflows
 
-### 4) Classify findings
+**Subagent-Driven Development:**
+- Review after EACH task
+- Catch issues before they compound
+- Fix before moving to next task
 
-- **Critical**: must fix now
-- **Important**: fix before continuing
-- **Minor**: track for later if not blocking
+**Executing Plans:**
+- Review after each batch (3 tasks)
+- Get feedback, apply, continue
 
-### 5) Act and report
+**Ad-Hoc Development:**
+- Review before merge
+- Review when stuck
 
-- Fix Critical and Important items before proceeding.
-- For disputed feedback, push back with technical reasoning and evidence.
-- Report concise outcome and readiness state.
-
-## Output Template
-
-Use this structure:
-
-```text
-Review scope: <BASE_SHA>..<HEAD_SHA>
-Requirements checked: <plan section or requirement list>
-Findings:
-- Critical: <count>
-- Important: <count>
-- Minor: <count>
-Actions taken:
-- <fixes applied or rationale for deferral>
-Status: <ready / blocked>
-```
+Companion skill:
+- `superpowers-code-review` - Reviewer protocol and output format
+- `superpowers-receiving-code-review` - Apply feedback correctly
 
 ## Red Flags
 
-Never:
-- Skip review because change "looks simple"
-- Ignore Critical findings
-- Continue with unresolved Important findings
-- Accept questionable feedback without verification
+**Never:**
+- Skip review because "it's simple"
+- Ignore Critical issues
+- Proceed with unfixed Important issues
+- Argue with valid technical feedback
 
-## Integration
+**If reviewer wrong:**
+- Push back with technical reasoning
+- Show code/tests that prove it works
+- Request clarification
 
-- Used by `superpowers-executing-plans` after each batch checkpoint
-- Pairs with `superpowers-receiving-code-review` for handling feedback rigorously
+Template path:
+- `migration/.codex/skills/requesting-code-review/reviewer-prompt.md`

@@ -7,78 +7,78 @@ description: Use when you have a written implementation plan and need discipline
 
 ## Overview
 
-Load a written plan, review it critically, execute tasks in batches, and report verification evidence between batches.
+Load plan, review critically, execute tasks in batches, report for review between batches.
 
-**Core principle:** Batch execution with checkpoints.
+**Core principle:** Batch execution with checkpoints for architect review.
 
-**Announce at start:** "I'm using the superpowers-executing-plans skill to implement this plan."
+**Announce at start:** "I'm using the executing-plans skill to implement this plan."
 
 ## The Process
 
 ### Step 1: Load and Review Plan
-
-1. Read the plan file completely.
-2. Identify concerns or ambiguities.
-3. If concerns exist, raise them with Felix before starting.
-4. If clear, create `update_plan` items and proceed.
+1. Read plan file
+2. Review critically - identify any questions or concerns about the plan
+3. If concerns: Raise them with your human partner before starting
+4. If no concerns: Create update_plan and proceed
 
 ### Step 2: Execute Batch
-
-Default first batch: first 3 tasks.
+**Default: First 3 tasks**
 
 For each task:
-1. Mark in progress.
-2. Follow plan steps exactly.
-3. Run required verifications.
-4. Mark completed.
+1. Mark as in_progress
+2. Follow each step exactly (plan has bite-sized steps)
+3. Run verifications as specified
+4. Mark as completed
 
 ### Step 3: Report
-
-When batch completes:
-- Run `superpowers-requesting-code-review` on the batch range.
-- Report what changed.
-- Report verification results.
-- Report review findings and fixes.
+When batch complete:
+- Show what was implemented
+- Show verification output
 - Say: "Ready for feedback."
 
 ### Step 4: Continue
-
 Based on feedback:
-- Apply requested corrections.
-- Execute next batch.
-- Repeat until all tasks complete.
+- Apply changes if needed
+- Execute next batch
+- Repeat until complete
 
 ### Step 5: Complete Development
 
-After all tasks complete and verifications pass:
-- Announce: "I'm using the superpowers-finishing-a-development-branch skill to complete this work."
-- Use `superpowers-finishing-a-development-branch` for final verification and integration decision.
+After all tasks complete and verified:
+- Announce: "I'm using the finishing-a-development-branch skill to complete this work."
+- **REQUIRED SUB-SKILL:** Use superpowers-finishing-a-development-branch
+- Follow that skill to verify tests, present options, execute choice
 
-## Stop Conditions
+## When to Stop and Ask for Help
 
-Stop immediately and ask Felix when:
-- A blocker appears mid-batch (dependency, failing verification, unclear instruction)
-- The plan has critical gaps
-- You do not understand an instruction
+**STOP executing immediately when:**
+- Hit a blocker mid-batch (missing dependency, test fails, instruction unclear)
+- Plan has critical gaps preventing starting
+- You don't understand an instruction
 - Verification fails repeatedly
 
-Do not guess through blockers.
+**Ask for clarification rather than guessing.**
+
+## When to Revisit Earlier Steps
+
+**Return to Review (Step 1) when:**
+- Partner updates the plan based on your feedback
+- Fundamental approach needs rethinking
+
+**Don't force through blockers** - stop and ask.
 
 ## Remember
-
-- Review critically before action
+- Review plan critically first
 - Follow plan steps exactly
-- Never skip verification
-- Report only after batch checkpoints
-- Do not start implementation on main/master without explicit permission
+- Don't skip verifications
+- Reference skills when plan says to
+- Between batches: just report and wait
+- Stop when blocked, don't guess
+- Never start implementation on main/master branch without explicit user consent
 
 ## Integration
 
-Required workflow skills:
-- `superpowers-using-git-worktrees` - setup isolated workspace
-- `superpowers-writing-plans` - provides the plan structure
-- `superpowers-requesting-code-review` - review each batch before moving forward
-- `superpowers-finishing-a-development-branch` - closes out work safely
-
-Alternative workflow:
-- `superpowers-subagent-driven-development` - per-task review loop instead of batched checkpoints
+**Required workflow skills:**
+- **superpowers-using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
+- **superpowers-writing-plans** - Creates the plan this skill executes
+- **superpowers-finishing-a-development-branch** - Complete development after all tasks

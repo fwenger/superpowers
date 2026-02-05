@@ -4,56 +4,91 @@ description: Use when starting any conversation in this migration workspace. Enf
 ---
 
 <EXTREMELY-IMPORTANT>
-If you think there is even a 1% chance a skill might apply, you MUST load and use it.
+If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
 
 IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
+
+This is not negotiable. This is not optional. You cannot rationalize your way out of this.
 </EXTREMELY-IMPORTANT>
+
+## How to Access Skills
+
+**In Codex:** Use the Codex skill selection. When you invoke a skill, its content is loaded and presented to you—follow it directly. Never use the file-reading tools on skill files.
+
+**In other environments:** Check your platform's documentation for how skills are loaded.
 
 # Using Skills
 
 ## The Rule
 
-Invoke relevant or requested skills BEFORE any response or action.
+**Invoke relevant or requested skills BEFORE any response or action.** Even a 1% chance a skill might apply means that you should invoke the skill to check. If an invoked skill turns out to be wrong for the situation, you don't need to use it.
 
-## How to Load Skills in This Workspace
+## Required Declaration
 
-- Prefer Codex native skill selection/invocation from the workspace skill set.
-- Primary migration skill location: `migration/.codex/skills/`.
-- If a skill cannot be loaded, state the blocker and use the closest reproducible fallback.
+Before starting task execution, write one line:
 
-## Required One-Line Declaration
+`Skills used: <...>. Mappings/fallbacks: <...>.`
 
-Before starting work, write:
+```dot
+digraph skill_flow {
+    "User message received" [shape=doublecircle];
+    "Might any skill apply?" [shape=diamond];
+    "Invoke Codex skill selection" [shape=box];
+    "Announce/declare: Skills used: <...>. Mappings/fallbacks: <...>. Using [skill] to [purpose]." [shape=box];
+    "Has checklist?" [shape=diamond];
+    "Create update_plan todo per item" [shape=box];
+    "Follow skill exactly" [shape=box];
+    "Respond (including clarifications)" [shape=doublecircle];
 
-`Skills: <...>. Mappings/fallbacks: <...>.`
+    "User message received" -> "Might any skill apply?";
+    "Might any skill apply?" -> "Invoke Codex skill selection" [label="yes, even 1%"];
+    "Might any skill apply?" -> "Respond (including clarifications)" [label="definitely not"];
+    "Invoke Codex skill selection" -> "Announce/declare: Skills used: <...>. Mappings/fallbacks: <...>. Using [skill] to [purpose].";
+    "Announce/declare: Skills used: <...>. Mappings/fallbacks: <...>. Using [skill] to [purpose]." -> "Has checklist?";
+    "Has checklist?" -> "Create update_plan todo per item" [label="yes"];
+    "Has checklist?" -> "Follow skill exactly" [label="no"];
+    "Create update_plan todo per item" -> "Follow skill exactly";
+}
+```
 
-## Checklist Tracking
+## Red Flags
 
-If a loaded skill contains checklist-style steps, track them explicitly with `update_plan`.
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
 
 ## Skill Priority
 
 When multiple skills could apply, use this order:
 
-1. Process skills first (superpowers-brainstorming, superpowers-systematic-debugging)
-2. Implementation skills second (superpowers-writing-plans, superpowers-executing-plans, superpowers-subagent-driven-development, superpowers-using-git-worktrees, superpowers-dispatching-parallel-agents, superpowers-test-driven-development, superpowers-verification-before-completion)
-3. Review skills as checkpoint gates (superpowers-requesting-code-review, superpowers-receiving-code-review)
-4. Completion/meta skills as closeout tools (superpowers-finishing-a-development-branch, superpowers-writing-skills)
+1. **Process skills first** (brainstorming, debugging) - these determine HOW to approach the task
+2. **Implementation skills second** (frontend-design, mcp-builder) - these guide execution
 
-"Let's build X" -> superpowers-brainstorming first, then superpowers-writing-plans and implementation skills.
-"Fix this bug" -> superpowers-systematic-debugging first, then superpowers-test-driven-development and superpowers-verification-before-completion.
+"Let's build X" → brainstorming first, then implementation skills.
+"Fix this bug" → debugging first, then domain-specific skills.
+"Need an independent review" → `superpowers-requesting-code-review`, then run `superpowers-code-review` in a new reviewer thread, then `superpowers-receiving-code-review`.
 
-## Red Flags
+## Skill Types
 
-These thoughts mean STOP and load skills first:
+**Rigid** (TDD, debugging): Follow exactly. Don't adapt away discipline.
 
-- "This is just a simple question"
-- "I need context first"
-- "I'll do one quick thing before loading a skill"
-- "I remember the skill already"
-- "This doesn't need a formal skill"
+**Flexible** (patterns): Adapt principles to context.
 
-## Non-Negotiable
+The skill itself tells you which.
 
-User instructions define WHAT to do.
-Skills define HOW to do it.
+## User Instructions
+
+Instructions say WHAT, not HOW. "Add X" or "Fix Y" doesn't mean skip workflows.

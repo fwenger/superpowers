@@ -7,27 +7,33 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 
 ## Overview
 
-Write implementation plans assuming the implementer has little context and needs exact guidance. Provide exact file paths, code targets, validation commands, and acceptance criteria. Keep tasks bite-sized. Apply DRY, YAGNI, and verification discipline.
+Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
 
-**Announce at start:** "I'm using the superpowers-writing-plans skill to create the implementation plan."
+Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
 
-**Save plans to:** `migration/docs/plans/YYYY-MM-DD-<feature-name>.md`
+**Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
+
+**Context:** This should be run in a dedicated worktree (created by brainstorming skill).
+
+**Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
 
 ## Bite-Sized Task Granularity
 
-Each step should be one action (2-5 minutes):
-- Write failing test
-- Run it to confirm failure
-- Implement minimum code
-- Re-run tests
-- Commit/checkpoint
+**Each step is one action (2-5 minutes):**
+- "Write the failing test" - step
+- "Run it to make sure it fails" - step
+- "Implement the minimal code to make the test pass" - step
+- "Run the tests and make sure they pass" - step
+- "Commit" - step
 
 ## Plan Document Header
 
-Every plan starts with:
+**Every plan MUST start with this header:**
 
 ```markdown
 # [Feature Name] Implementation Plan
+
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers-executing-plans to implement this plan task-by-task.
 
 **Goal:** [One sentence describing what this builds]
 
@@ -49,36 +55,62 @@ Every plan starts with:
 - Test: `tests/exact/path/to/test.py`
 
 **Step 1: Write the failing test**
-[exact test snippet]
 
-**Step 2: Run test to verify it fails**
-Run: `[exact command]`
-Expected: [specific failure]
-
-**Step 3: Write minimal implementation**
-[exact implementation snippet]
-
-**Step 4: Run test to verify it passes**
-Run: `[exact command]`
-Expected: [specific pass result]
-
-**Step 5: Checkpoint**
-[exact command(s)]
+```python
+def test_specific_behavior():
+    result = function(input)
+    assert result == expected
 ```
 
-## Plan Requirements
+**Step 2: Run test to verify it fails**
 
+Run: `pytest tests/path/test.py::test_name -v`
+Expected: FAIL with "function not defined"
+
+**Step 3: Write minimal implementation**
+
+```python
+def function(input):
+    return expected
+```
+
+**Step 4: Run test to verify it passes**
+
+Run: `pytest tests/path/test.py::test_name -v`
+Expected: PASS
+
+**Step 5: Commit**
+
+```bash
+git add tests/path/test.py src/path/file.py
+git commit -m "feat: add specific feature"
+```
+```
+
+## Remember
 - Exact file paths always
-- Complete code targets (not vague instructions)
+- Complete code in plan (not "add validation")
 - Exact commands with expected output
-- Explicit failure modes and rollback notes when needed
-- Verification after every meaningful step
+- Reference relevant skills with @ syntax
+- DRY, YAGNI, TDD, frequent commits
 
 ## Execution Handoff
 
-After saving the plan, offer execution modes:
+After saving the plan, offer execution choice:
 
-1. **`superpowers-subagent-driven-development` (this session)** - task-by-task execution with per-task review gates.
-2. **`superpowers-executing-plans` (same or separate session)** - execute in batched checkpoints.
+**"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
 
-For both modes: do not skip verifications, and stop immediately when blocked.
+**1. Subagent-Driven (this session)** - I dispatch fresh subagent per task, review between tasks, fast iteration
+
+**2. Parallel Session (separate)** - Open new session with executing-plans, batch execution with checkpoints
+
+**Which approach?"**
+
+**If Subagent-Driven chosen:**
+- **REQUIRED SUB-SKILL:** Use superpowers-subagent-driven-development
+- Stay in this session
+- Fresh subagent per task + code review
+
+**If Parallel Session chosen:**
+- Guide them to open new session in worktree
+- **REQUIRED SUB-SKILL:** New session uses superpowers-executing-plans

@@ -7,81 +7,194 @@ description: Use when implementation is complete and you need to decide integrat
 
 ## Overview
 
-Complete development work by verifying quality, presenting explicit integration options, executing the chosen path, and cleaning up safely.
+Guide completion of development work by presenting clear options and handling chosen workflow.
 
-**Core principle:** Verify -> decide -> execute -> clean up.
+**Core principle:** Verify tests → Present options → Execute choice → Clean up.
 
-**Announce at start:** "I'm using the superpowers-finishing-a-development-branch skill to complete this work."
+**Announce at start:** "I'm using the finishing-a-development-branch skill to complete this work."
 
-## Process
+## The Process
 
 ### Step 1: Verify Tests
 
-Run the project's test suite first.
+**Before presenting options, verify tests pass:**
 
-If tests fail:
-- Report failures clearly.
-- Do not proceed to merge/PR/discard options until resolved.
+```bash
+# Run project's test suite
+npm test / cargo test / pytest / go test ./...
+```
 
-### Step 2: Identify base branch
+**If tests fail:**
+```
+Tests failing (<N> failures). Must fix before completing:
 
-Determine likely base branch (`main` or `master`) and confirm if uncertain.
+[Show failures]
 
-### Step 3: Present options
+Cannot proceed with merge/PR until tests pass.
+```
 
-Present exactly these options:
+Stop. Don't proceed to Step 2.
 
-1. Merge back to base branch locally
+**If tests pass:** Continue to Step 2.
+
+### Step 2: Determine Base Branch
+
+```bash
+# Try common base branches
+git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
+```
+
+Or ask: "This branch split from main - is that correct?"
+
+### Step 3: Present Options
+
+Present exactly these 4 options:
+
+```
+Implementation complete. What would you like to do?
+
+1. Merge back to <base-branch> locally
 2. Push and create a Pull Request
-3. Keep the branch as-is for later
+3. Keep the branch as-is (I'll handle it later)
 4. Discard this work
 
-Ask Felix to choose one.
+Which option?
+```
 
-### Step 4: Execute selected option
+**Don't add explanation** - keep options concise.
 
-#### Option 1: Merge locally
-1. Checkout base branch
-2. Pull latest changes
-3. Merge feature branch
-4. Re-run tests on merged result
-5. Delete merged feature branch
+### Step 4: Execute Choice
 
-#### Option 2: Push and create PR
-1. Push branch
-2. Open PR with concise summary and test plan
-3. Keep branch/worktree unless Felix asks cleanup
+#### Option 1: Merge Locally
 
-#### Option 3: Keep as-is
-- Report branch name and worktree path
-- Do not cleanup
+```bash
+# Switch to base branch
+git checkout <base-branch>
+
+# Pull latest
+git pull
+
+# Merge feature branch
+git merge <feature-branch>
+
+# Verify tests on merged result
+<test command>
+
+# If tests pass
+git branch -d <feature-branch>
+```
+
+Then: Cleanup worktree (Step 5)
+
+#### Option 2: Push and Create PR
+
+```bash
+# Push branch
+git push -u origin <feature-branch>
+
+# Create PR
+gh pr create --title "<title>" --body "$(cat <<'EOF'
+## Summary
+<2-3 bullets of what changed>
+
+## Test Plan
+- [ ] <verification steps>
+EOF
+)"
+```
+
+Then: Cleanup worktree (Step 5)
+
+#### Option 3: Keep As-Is
+
+Report: "Keeping branch <name>. Worktree preserved at <path>."
+
+**Don't cleanup worktree.**
 
 #### Option 4: Discard
-Require explicit typed confirmation (`discard`) before destructive actions.
 
-After confirmation:
-1. Checkout base branch
-2. Delete feature branch forcefully if needed
-3. Remove associated worktree if applicable
+**Confirm first:**
+```
+This will permanently delete:
+- Branch <name>
+- All commits: <commit-list>
+- Worktree at <path>
 
-### Step 5: Worktree cleanup rules
+Type 'discard' to confirm.
+```
 
-- Cleanup for options 1 and 4
-- Keep worktree for options 2 and 3 unless Felix asks otherwise
+Wait for exact confirmation.
+
+If confirmed:
+```bash
+git checkout <base-branch>
+git branch -D <feature-branch>
+```
+
+Then: Cleanup worktree (Step 5)
+
+### Step 5: Cleanup Worktree
+
+**For Options 1, 2, 4:**
+
+Check if in worktree:
+```bash
+git worktree list | grep $(git branch --show-current)
+```
+
+If yes:
+```bash
+git worktree remove <worktree-path>
+```
+
+**For Option 3:** Keep worktree.
+
+## Quick Reference
+
+| Option | Merge | Push | Keep Worktree | Cleanup Branch |
+|--------|-------|------|---------------|----------------|
+| 1. Merge locally | ✓ | - | - | ✓ |
+| 2. Create PR | - | ✓ | ✓ | - |
+| 3. Keep as-is | - | - | ✓ | - |
+| 4. Discard | - | - | - | ✓ (force) |
+
+## Common Mistakes
+
+**Skipping test verification**
+- **Problem:** Merge broken code, create failing PR
+- **Fix:** Always verify tests before offering options
+
+**Open-ended questions**
+- **Problem:** "What should I do next?" → ambiguous
+- **Fix:** Present exactly 4 structured options
+
+**Automatic worktree cleanup**
+- **Problem:** Remove worktree when might need it (Option 2, 3)
+- **Fix:** Only cleanup for Options 1 and 4
+
+**No confirmation for discard**
+- **Problem:** Accidentally delete work
+- **Fix:** Require typed "discard" confirmation
 
 ## Red Flags
 
-Never:
+**Never:**
 - Proceed with failing tests
-- Merge without post-merge verification
-- Delete work without explicit confirmation
-- Force-push or rewrite history without explicit request
+- Merge without verifying tests on result
+- Delete work without confirmation
+- Force-push without explicit request
+
+**Always:**
+- Verify tests before offering options
+- Present exactly 4 options
+- Get typed confirmation for Option 4
+- Clean up worktree for Options 1 & 4 only
 
 ## Integration
 
-Called by:
-- `superpowers-executing-plans`
-- `superpowers-subagent-driven-development`
+**Called by:**
+- **subagent-driven-development** (Step 7) - After all tasks complete
+- **executing-plans** (Step 5) - After all batches complete
 
-Pairs with:
-- `superpowers-using-git-worktrees`
+**Pairs with:**
+- **using-git-worktrees** - Cleans up worktree created by that skill
