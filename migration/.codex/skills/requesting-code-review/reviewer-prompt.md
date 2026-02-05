@@ -15,7 +15,7 @@ You are the reviewer agent. Review these completed changes for production readin
 
 ## Requirements/Plan
 
-{PLAN_REFERENCE}
+{PLAN_OR_REQUIREMENTS}
 
 ## Git Range to Review
 

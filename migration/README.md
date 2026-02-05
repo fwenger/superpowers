@@ -91,13 +91,14 @@ Validation performed:
 High-fidelity support-file migration is complete for all migrated skills.
 
 - Copied all non-`SKILL.md` files from `skills/<skill>/...` to matching paths in `migration/.codex/skills/<skill>/...`.
-- 21 support files were added across:
+- Support files were added across:
   - `requesting-code-review`
   - `subagent-driven-development`
   - `systematic-debugging`
   - `test-driven-development`
   - `writing-skills`
-- Verified zero remaining support-file gaps relative to source skills.
+- Verified support-file parity relative to source skills, with one intentional migration divergence:
+  - `skills/requesting-code-review/code-reviewer.md` was replaced by `migration/.codex/skills/requesting-code-review/reviewer-prompt.md` as part of the dedicated `superpowers-code-review` split.
 
 ## Code Review Skill Split
 

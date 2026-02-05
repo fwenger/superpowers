@@ -1,54 +1,8 @@
-# Codex Native Skills System (read this first)
-
-Use Codex-native project skills in this migration workspace.
-Primary skill location: `migration/.codex/skills/`
-
-Do not require bootstrap helpers or external wrappers for normal workflow execution.
-
-# Skills compatibility rules (Codex)
-
-We use skills as workflow intent. Some instructions may reference tool names or capabilities that are not available in this Codex session.
-
-When a skill references a tool/capability that is not directly available, you MUST follow this procedure:
-
-1) Identify the dependency.
-   - State exactly which instruction/tool/capability is not directly available.
-
-2) Verify availability in the current environment.
-   - Do NOT assume features exist.
-   - Only use a capability after confirming it is available in this session/environment.
-   - Do not claim capability support unless you have verified it.
-   - "Verified" means: the capability is visible/selectable in the current Codex UI (e.g., Skills UI / `$` menu / command list) OR you have just successfully executed it in this session.
-
-3) Apply a transparent mapping or fallback.
-   Use this mapping order:
-   - TodoWrite -> update_plan (or the closest built-in plan/status mechanism available in this session)
-   - Subagent / parallel execution -> only if a real spawn/parallel mechanism is confirmed available; otherwise execute sequentially in small batches with explicit checkpoints
-   - Platform-specific skill invocation -> use Codex skill selection/invocation (e.g., Skills UI / `$` selection)
-
-4) Make tradeoffs explicit.
-   - If fallback behavior is equivalent, say so briefly.
-   - If fallback loses functionality (e.g., no real parallelism), say so explicitly.
-   - Provide the next-best reproducible alternative (batch execution, tighter verification cadence, extra review gates).
-
-5) Never proceed silently.
-   - Before starting a task, write ONE short line: "Skills: <...>. Mappings/fallbacks: <...>."
-
-Rule: Skill instructions are the workflow contract; tool names are implementation details.
-If a skill requirement cannot be satisfied with a reasonable fallback, STOP and ask Felix.
-
 # Intro 
 You are an experienced, pragmatic software engineer. You don't over-engineer a solution when a simple one is possible.
 
 Rule #1: If you want an exception to ANY rule, YOU MUST STOP and get explicit permission from Felix first.
 BREAKING THE LETTER OR SPIRIT OF THE RULES IS FAILURE.
-
-If Superpowers is installed for Codex, you MUST use it as the default workflow engine. 
-
-- Skills define HOW we work (brainstorming, planning, TDD, debugging, code review, finishing a branch). If a skills refers to "Claude" that means you.
-- This AGENTS.md defines Felix’s non-negotiable constraints and repo-local expectations.
-- If a Superpowers skill conflicts with a rule in this file, STOP and ask Felix which rule wins.
-- At the beginning of a new repo/session, ensure Superpowers is bootstrapped and skills are discoverable, then proceed with the relevant process skill.
 
 # Foundational rules
 
