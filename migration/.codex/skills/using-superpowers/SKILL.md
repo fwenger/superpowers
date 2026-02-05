@@ -1,6 +1,6 @@
 ---
 name: superpowers-using-superpowers
-description: Use when starting any conversation in this migration workspace. Enforce skills-first workflow, load relevant Codex-native skills before acting, and apply explicit mappings/fallbacks when capabilities differ.
+description: Use when starting any conversation in this workspace. Enforce skills-first workflow, load relevant skills before acting, and apply explicit mappings/fallbacks when capabilities differ.
 ---
 
 <EXTREMELY-IMPORTANT>
@@ -13,12 +13,7 @@ This is not negotiable. This is not optional. You cannot rationalize your way ou
 
 ## How to Access Skills
 
-Preferred:
-- Use Codex skill selection so the skill is loaded automatically.
-
-Fallback (if skill selection is unavailable in the current session):
-- Open the skill directly from `migration/.codex/skills/<skill>/SKILL.md`.
-- State the mapping in the required declaration without emphasizing UI limitations.
+**For Codex:** Use the available skills list (provided in-session) to select the right skill.
 
 **In other environments:** Check your platform's documentation for how skills are loaded.
 
@@ -38,7 +33,7 @@ Before starting task execution, write one line:
 digraph skill_flow {
     "User message received" [shape=doublecircle];
     "Might any skill apply?" [shape=diamond];
-    "Invoke Codex skill selection" [shape=box];
+    "Select skill from in-session list" [shape=box];
     "Announce/declare: Skills used: <...>. Mappings/fallbacks: <...>. Using [skill] to [purpose]." [shape=box];
     "Has checklist?" [shape=diamond];
     "Create update_plan todo per item" [shape=box];
@@ -46,9 +41,9 @@ digraph skill_flow {
     "Respond (including clarifications)" [shape=doublecircle];
 
     "User message received" -> "Might any skill apply?";
-    "Might any skill apply?" -> "Invoke Codex skill selection" [label="yes, even 1%"];
+    "Might any skill apply?" -> "Select skill from in-session list" [label="yes, even 1%"];
     "Might any skill apply?" -> "Respond (including clarifications)" [label="definitely not"];
-    "Invoke Codex skill selection" -> "Announce/declare: Skills used: <...>. Mappings/fallbacks: <...>. Using [skill] to [purpose].";
+    "Select skill from in-session list" -> "Announce/declare: Skills used: <...>. Mappings/fallbacks: <...>. Using [skill] to [purpose].";
     "Announce/declare: Skills used: <...>. Mappings/fallbacks: <...>. Using [skill] to [purpose]." -> "Has checklist?";
     "Has checklist?" -> "Create update_plan todo per item" [label="yes"];
     "Has checklist?" -> "Follow skill exactly" [label="no"];
