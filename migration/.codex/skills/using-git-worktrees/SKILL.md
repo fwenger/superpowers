@@ -42,13 +42,13 @@ If no directory exists and no AGENTS.md preference:
 ```
 No worktree directory found. Where should I create worktrees?
 
-1. .worktrees/ (project-local, hidden)
-2. ~/.worktrees/<project-name>/ (global location, default)
+1. .worktrees/ (project-local, hidden, default)
+2. ~/.worktrees/<project-name>/ (global location)
 
 Which would you prefer?
 ```
 
-**Default if not otherwise specified:** `~/.worktrees/<project-name>/`.
+**Default if not otherwise specified:** `.worktrees/`.
 
 ## Safety Verification
 
