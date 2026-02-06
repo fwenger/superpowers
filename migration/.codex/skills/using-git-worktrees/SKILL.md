@@ -11,7 +11,7 @@ Git worktrees create isolated workspaces sharing the same repository, allowing w
 
 **Core principle:** Systematic directory selection + safety verification = reliable isolation.
 
-**Announce at start:** "I'm using the using-git-worktrees skill to set up an isolated workspace."
+**Announce at start:** "I'm using the superpowers-using-git-worktrees skill to set up an isolated workspace."
 
 ## Directory Selection Process
 
@@ -27,26 +27,28 @@ ls -d worktrees 2>/dev/null      # Alternative
 
 **If found:** Use that directory. If both exist, `.worktrees` wins.
 
-### 2. Check CLAUDE.md
+### 2. Check Workspace Instructions (AGENTS.md)
 
 ```bash
-grep -i "worktree.*director" CLAUDE.md 2>/dev/null
+grep -iE "worktree.*(directory|location|path)" AGENTS.md 2>/dev/null
 ```
 
 **If preference specified:** Use it without asking.
 
-### 3. Ask User
+### 3. Apply Default (or Ask User)
 
-If no directory exists and no CLAUDE.md preference:
+If no directory exists and no AGENTS.md preference:
 
 ```
 No worktree directory found. Where should I create worktrees?
 
 1. .worktrees/ (project-local, hidden)
-2. ~/.config/superpowers/worktrees/<project-name>/ (global location)
+2. ~/.worktrees/<project-name>/ (global location, default)
 
 Which would you prefer?
 ```
+
+**Default if not otherwise specified:** `~/.worktrees/<project-name>/`.
 
 ## Safety Verification
 
@@ -61,14 +63,14 @@ git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/d
 
 **If NOT ignored:**
 
-Per Jesse's rule "Fix broken things immediately":
+Per workspace rule "Fix broken things immediately":
 1. Add appropriate line to .gitignore
 2. Commit the change
 3. Proceed with worktree creation
 
 **Why critical:** Prevents accidentally committing worktree contents to repository.
 
-### For Global Directory (~/.config/superpowers/worktrees)
+### For Global Directory (~/.worktrees)
 
 No .gitignore verification needed - outside project entirely.
 
@@ -88,8 +90,8 @@ case $LOCATION in
   .worktrees|worktrees)
     path="$LOCATION/$BRANCH_NAME"
     ;;
-  ~/.config/superpowers/worktrees/*)
-    path="~/.config/superpowers/worktrees/$project/$BRANCH_NAME"
+  ~/.worktrees/*)
+    path="~/.worktrees/$project/$BRANCH_NAME"
     ;;
 esac
 
@@ -148,7 +150,7 @@ Ready to implement <feature-name>
 | `.worktrees/` exists | Use it (verify ignored) |
 | `worktrees/` exists | Use it (verify ignored) |
 | Both exist | Use `.worktrees/` |
-| Neither exists | Check CLAUDE.md → Ask user |
+| Neither exists | Check AGENTS.md → default `~/.worktrees/<project-name>/` (ask if needed) |
 | Directory not ignored | Add to .gitignore + commit |
 | Tests fail during baseline | Report failures + ask |
 | No package.json/Cargo.toml | Skip dependency install |
@@ -163,7 +165,7 @@ Ready to implement <feature-name>
 ### Assuming directory location
 
 - **Problem:** Creates inconsistency, violates project conventions
-- **Fix:** Follow priority: existing > CLAUDE.md > ask
+- **Fix:** Follow priority: existing > AGENTS.md > default/ask
 
 ### Proceeding with failing tests
 
@@ -178,7 +180,7 @@ Ready to implement <feature-name>
 ## Example Workflow
 
 ```
-You: I'm using the using-git-worktrees skill to set up an isolated workspace.
+You: I'm using the superpowers-using-git-worktrees skill to set up an isolated workspace.
 
 [Check .worktrees/ - exists]
 [Verify ignored - git check-ignore confirms .worktrees/ is ignored]
@@ -186,7 +188,7 @@ You: I'm using the using-git-worktrees skill to set up an isolated workspace.
 [Run npm install]
 [Run npm test - 47 passing]
 
-Worktree ready at /Users/jesse/myproject/.worktrees/auth
+Worktree ready at /Users/<user>/.worktrees/myproject/auth
 Tests passing (47 tests, 0 failures)
 Ready to implement auth feature
 ```
@@ -198,10 +200,10 @@ Ready to implement auth feature
 - Skip baseline test verification
 - Proceed with failing tests without asking
 - Assume directory location when ambiguous
-- Skip CLAUDE.md check
+- Skip AGENTS.md check
 
 **Always:**
-- Follow directory priority: existing > CLAUDE.md > ask
+- Follow directory priority: existing > AGENTS.md > default/ask
 - Verify directory is ignored for project-local
 - Auto-detect and run project setup
 - Verify clean test baseline
@@ -209,10 +211,10 @@ Ready to implement auth feature
 ## Integration
 
 **Called by:**
-- **brainstorming** (Phase 4) - REQUIRED when design is approved and implementation follows
-- **subagent-driven-development** - REQUIRED before executing any tasks
-- **executing-plans** - REQUIRED before executing any tasks
+- **superpowers-brainstorming** (Phase 4) - REQUIRED when design is approved and implementation follows
+- **superpowers-subagent-driven-development** - REQUIRED before executing any tasks
+- **superpowers-executing-plans** - REQUIRED before executing any tasks
 - Any skill needing isolated workspace
 
 **Pairs with:**
-- **finishing-a-development-branch** - REQUIRED for cleanup after work complete
+- **superpowers-finishing-a-development-branch** - REQUIRED for cleanup after work complete

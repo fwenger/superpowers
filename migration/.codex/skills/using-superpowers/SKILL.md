@@ -77,7 +77,7 @@ When multiple skills could apply, use this order:
 1. **Process skills first** (superpowers-brainstorming, superpowers-writing-plans, superpowers-systematic-debugging) - these determine HOW to approach the task
 2. **Implementation skills second** (superpowers-executing-plans, superpowers-test-driven-development, superpowers-verification-before-completion, superpowers-using-git-worktrees) - these guide execution
 
-"Let's build X" → brainstorming first, then implementation skills.
+"Let's build X" → superpowers-brainstorming first, then implementation skills.
 "Fix this bug" → debugging first, then domain-specific skills.
 "Need an independent review" → `superpowers-requesting-code-review`, then run `superpowers-code-review` in a new reviewer thread, then `superpowers-receiving-code-review`.
 

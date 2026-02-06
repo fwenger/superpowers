@@ -56,6 +56,16 @@ These skills explicitly declare fallback behavior when required capabilities are
 - `migration/.codex/skills/subagent-driven-development/SKILL.md`
 - `migration/.codex/skills/dispatching-parallel-agents/SKILL.md`
 
+## Worktree Default (Current)
+
+- Canonical worktree skill: `superpowers-using-git-worktrees`
+- Default for new setups: `~/.worktrees/<repo>/<branch>`
+- Precedence remains:
+  - Existing repo-local `.worktrees/`
+  - Existing repo-local `worktrees/`
+  - Instruction-file preference (for example, `AGENTS.md`)
+  - Then fallback default `~/.worktrees/<repo>/<branch>`
+
 ## Installation Status (Current)
 
 Phase 1-3 rollout to `/Users/felix/.codex/skills` is complete via symlinks for fast iteration.
@@ -70,7 +80,7 @@ Installed (symlinked from migration workspace): 13 skills
 - `requesting-code-review`
 - `systematic-debugging`
 - `test-driven-development`
-- `using-git-worktrees`
+- `using-git-worktrees` (skill: `superpowers-using-git-worktrees`)
 - `using-superpowers`
 - `verification-before-completion`
 - `writing-plans`
@@ -111,9 +121,14 @@ To support Codex-native independent review threads, reviewer prompt content was 
 
 Because installed entries in `/Users/felix/.codex/skills` are directory symlinks into `migration/.codex/skills`, these copied support files are immediately available for installed skills without extra per-file linking.
 
+Runtime scope note:
+- This remediation pass normalized runtime `SKILL.md` files.
+- Some support/reference files intentionally retain archival legacy terminology for high-fidelity provenance.
+
 ## Planning Artifacts
 
 - `migration/docs/plans/2026-02-04-codex-native-core-loop-migration.md`
+- `migration/docs/plans/2026-02-06-runtime-skill-audit-remediation.md`
 
 This captures the implementation plan and verification checkpoints used for the migration effort.
 
