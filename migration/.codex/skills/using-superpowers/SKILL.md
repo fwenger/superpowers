@@ -79,7 +79,9 @@ When multiple skills could apply, use this order:
 
 "Let's build X" → superpowers-brainstorming first, then implementation skills.
 "Fix this bug" → debugging first, then domain-specific skills.
-"Need an independent review" → `superpowers-requesting-code-review`, then run `superpowers-code-review` in a new reviewer thread, then `superpowers-receiving-code-review`.
+"Need an independent review" → 
+"Request code review" in implementer thread → `superpowers-requesting-code-review`.
+"Review this diff/branch" in reviewer thread → `superpowers-code-review`.
 
 ## Skill Types
 

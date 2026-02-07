@@ -1,6 +1,6 @@
 ---
 name: superpowers-requesting-code-review
-description: Use when completing major tasks or before merge to verify implementation quality (e.g., end of execution batch, major feature completion, pre-PR readiness checks).
+description: Use when you need to request an independent code review from another thread/agent (e.g., user asks to "request code review", end of execution batch, major feature completion, pre-PR readiness checks).
 ---
 
 # Requesting Code Review
@@ -10,6 +10,12 @@ Request independent review early so issues are caught before they cascade.
 **Core principle:** Review early, review often.
 
 ## When to Request Review
+
+Trigger cues (invoke this skill):
+- "request code review"
+- "ask another agent/thread to review this"
+- "prepare reviewer prompt/handoff"
+- "get an independent review before merge"
 
 **Mandatory:**
 - After each task in subagent-driven development

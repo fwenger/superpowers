@@ -35,6 +35,8 @@ When batch complete:
 - Show what was implemented
 - Show verification output
 - Say: "Ready for feedback."
+- **REQUIRED SUB-SKILL:** Use superpowers-requesting-code-review to request independent review for the completed batch.
+- Process resulting feedback with superpowers-receiving-code-review before starting the next batch.
 
 ### Step 4: Continue
 Based on feedback:
@@ -81,4 +83,5 @@ After all tasks complete and verified:
 **Required workflow skills:**
 - **superpowers-using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
 - **superpowers-writing-plans** - Creates the plan this skill executes
+- **superpowers-requesting-code-review** - REQUIRED: Request independent review after each completed batch
 - **superpowers-finishing-a-development-branch** - Complete development after all tasks

@@ -37,6 +37,15 @@ Stop. Don't proceed to Step 2.
 
 **If tests pass:** Continue to Step 2.
 
+### Step 1.5: Confirm Independent Review
+
+Before presenting merge/PR options, verify an independent review was requested.
+
+- If no independent review has been requested yet:
+  - **REQUIRED SUB-SKILL:** Use superpowers-requesting-code-review.
+  - Process feedback with superpowers-receiving-code-review.
+  - Return to Step 1 to re-verify tests after any fixes.
+
 ### Step 2: Determine Base Branch
 
 ```bash
@@ -198,3 +207,4 @@ git worktree remove <worktree-path>
 
 **Pairs with:**
 - **superpowers-using-git-worktrees** - Cleans up worktree created by that skill
+- **superpowers-requesting-code-review** - Ensures independent review before merge/PR completion
