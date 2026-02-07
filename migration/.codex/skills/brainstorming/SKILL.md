@@ -40,7 +40,7 @@ Start by understanding the current project context, then ask questions one at a 
 - Commit the design document to git
 
 **Implementation (if continuing):**
-- Ask: "Ready to set up for implementation?"
+- Ask: "Ready to set up a new worktree, write a plan and implement it?"
 - Use superpowers-using-git-worktrees to create isolated workspace
 - Use superpowers-writing-plans to create detailed implementation plan
 
