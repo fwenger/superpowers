@@ -96,15 +96,18 @@ git commit -m "feat: add specific feature"
 
 ## Execution Handoff
 
-After saving the plan, offer execution choice:
+After saving the plan, first verify whether true delegation/subagent capability is available in this session.
 
-**"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
+**If delegation capability is verified, offer execution choice:**
 
 **1. Subagent-Driven (this session)** - I dispatch fresh subagent per task, review between tasks, fast iteration
 
 **2. Parallel Session (separate)** - Open new session with superpowers-executing-plans, batch execution with checkpoints
 
-**Which approach?"**
+**If delegation capability is not verified/available:**
+- Do not offer Subagent-Driven mode.
+- Offer only: Parallel Session with superpowers-executing-plans.
+- State explicitly that this preserves workflow quality gates with lower automation.
 
 **If Subagent-Driven chosen:**
 - **REQUIRED SUB-SKILL:** Use superpowers-subagent-driven-development
