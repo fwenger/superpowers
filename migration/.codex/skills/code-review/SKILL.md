@@ -8,12 +8,17 @@ description: Use when reviewing completed implementation work in an independent 
 Review completed changes for spec compliance, quality, risk, and production readiness.
 
 **Core principle:** Independent reviewer perspective catches issues implementers miss.
+**Repository default:** Review in local mode (new reviewer thread + git SHA range) unless Felix explicitly requests PR mode.
 
 ## Review Mode
 
-Preferred mode:
+Preferred mode in this repository:
 - Start a new thread/new agent as reviewer.
-- Run this skill in that reviewer thread.
+- Run this skill in that reviewer thread against local git range handoff.
+
+PR mode (optional):
+- Use when Felix explicitly requests PR-based review.
+- Review against PR URL plus PR discussion/context.
 
 Fallback mode (lower assurance):
 - If independent reviewer thread is unavailable, run this skill in the current thread and explicitly state reduced independence.
@@ -23,13 +28,15 @@ Fallback mode (lower assurance):
 - `{WHAT_WAS_IMPLEMENTED}`
 - `{PLAN_OR_REQUIREMENTS}`
 - `{DESCRIPTION}`
-- `{BASE_SHA}`
-- `{HEAD_SHA}`
+- Local mode: `{BASE_SHA}` and `{HEAD_SHA}`
+- PR mode: `{PR_URL}` (plus `{BASE_SHA}`/`{HEAD_SHA}` when provided)
 
 ## Process
 
 1. Read the implementation scope and requirements.
-2. Inspect `git diff --stat {BASE_SHA}..{HEAD_SHA}` and full diff.
+2. Determine review source:
+   - Local mode: inspect `git diff --stat {BASE_SHA}..{HEAD_SHA}` and full diff.
+   - PR mode: inspect PR diff and review context at `{PR_URL}`.
 3. Evaluate code quality, architecture, testing, requirements, and production readiness.
 4. Categorize findings by severity: Critical, Important, Minor.
 5. Give a merge-readiness verdict with technical reasoning.

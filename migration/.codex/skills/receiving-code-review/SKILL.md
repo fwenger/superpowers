@@ -10,6 +10,7 @@ description: Use when receiving review feedback before implementing suggestions 
 Code review requires technical evaluation, not emotional performance.
 
 **Core principle:** Verify before implementing. Ask before assuming. Technical correctness over social comfort.
+**Repository default:** In this repository, feedback usually comes from local reviewer-thread handoff; PR feedback is optional and used when Felix explicitly asks for PR mode.
 
 ## The Response Pattern
 

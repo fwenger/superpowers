@@ -8,6 +8,7 @@ description: Use when you need to request an independent code review from anothe
 Request independent review early so issues are caught before they cascade.
 
 **Core principle:** Review early, review often.
+**Repository default:** In this repository, use local reviewer-thread handoff unless Felix explicitly asks for PR-based review.
 
 ## When to Request Review
 
@@ -29,16 +30,25 @@ Trigger cues (invoke this skill):
 
 ## Review Modes
 
-### Mode A (Preferred): New Thread Reviewer
+### Mode A (Default in this repository): Local New Thread Reviewer
 
 Use a separate thread/new agent as reviewer and run `superpowers-code-review` there.
 
 Why preferred:
 - Independent reviewer perspective
 - Better chance to catch implementer blind spots
-- Closer to original subagent-review intent
+- No remote push/PR requirement for routine review handoff in this repo
 
-### Mode B (Fallback): Same Thread Self-Review
+### Mode B (Optional): PR-Based Reviewer Handoff
+
+Use when Felix explicitly asks for PR-based review or when external collaboration requires PR threads.
+
+Required:
+- Push branch and provide PR URL
+- Put review context directly into PR body/comment
+- Ask reviewer thread to review using PR URL + requirements
+
+### Mode C (Fallback): Same Thread Self-Review
 
 Use only when a separate reviewer thread is not available.
 
@@ -72,6 +82,18 @@ Use template at `reviewer-prompt.md`, fill placeholders:
 
 **3. Process reviewer feedback:**
 - Use `superpowers-receiving-code-review` for feedback handling, pushback, and fix ordering.
+
+## How to Request (Mode B: PR-Based)
+
+1. Push branch and open/update PR.
+2. Add a PR context block (body or comment) containing:
+   - `WHAT_WAS_IMPLEMENTED`
+   - `PLAN_OR_REQUIREMENTS`
+   - `DESCRIPTION`
+   - `BASE_SHA`
+   - `HEAD_SHA`
+3. Start reviewer thread, provide PR URL and ask it to run `superpowers-code-review`.
+4. Process reviewer feedback with `superpowers-receiving-code-review`.
 
 ## Integration with Workflows
 
