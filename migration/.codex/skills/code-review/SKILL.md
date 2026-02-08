@@ -105,6 +105,8 @@ Fallback mode (lower assurance):
 
 **Reasoning:** [Technical assessment in 1-2 sentences]
 
+**Prompt for Implementer:** If available, use skill superpowers-receiving-code-review now.
+
 ## Critical Rules
 
 **DO:**
