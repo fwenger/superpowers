@@ -13,6 +13,8 @@ Load plan, review critically, execute tasks in batches, report for review betwee
 
 **Announce at start:** "I'm using the superpowers-executing-plans skill to implement this plan."
 
+**Ask at start (if not already decided):** "Should I use a separate branch and worktree for this?" If yes, use superpowers-using-git-worktrees to set up before starting.
+
 ## The Process
 
 ### Step 1: Load and Review Plan
