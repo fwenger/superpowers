@@ -135,3 +135,20 @@ This captures the implementation plan and verification checkpoints used for the 
 ## Scope Boundary
 
 Migration work is intentionally local to `migration/`. Root repository behavior and legacy assets remain untouched until explicit rollout/installation.
+
+## Upstream Sync Notes (2026-02-13)
+
+Compared against upstream `main` changes through `e16d611`, we intentionally updated three migrated skills:
+
+- `migration/.codex/skills/brainstorming/SKILL.md`
+  - Added hard-gate and checklist/process-flow enforcement, while keeping Codex-native naming and references.
+- `migration/.codex/skills/using-superpowers/SKILL.md`
+  - Added Codex collaboration-mode `Plan` gate so brainstorming is required before plan-mode execution if not already completed.
+- `migration/.codex/skills/writing-plans/SKILL.md`
+  - Applied nested markdown fence fix (` ````markdown ... ```` `) for correct rendering.
+
+Out-of-scope for this migration pass:
+
+- `tests/subagent-driven-dev/run-test.sh`
+  - Claude-specific harness for `subagent-driven-development` workflow tests.
+  - Not currently relevant to Codex migration because `subagent-driven-development` remains intentionally not installed (see installation exceptions above).

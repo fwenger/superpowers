@@ -22,6 +22,7 @@ This is not negotiable. This is not optional. You cannot rationalize your way ou
 ## The Rule
 
 **Invoke relevant or requested skills BEFORE any response or action.** Even a 1% chance a skill might apply means that you should invoke the skill to check. If an invoked skill turns out to be wrong for the situation, you don't need to use it.
+When Codex collaboration mode is `Plan`, ensure brainstorming has already happened; if not, invoke superpowers-brainstorming before proceeding.
 
 ## Required Declaration
 
@@ -32,6 +33,9 @@ Before starting task execution, write one line:
 ```dot
 digraph skill_flow {
     "User message received" [shape=doublecircle];
+    "In Plan collaboration mode?" [shape=diamond];
+    "Already brainstormed?" [shape=diamond];
+    "Invoke superpowers-brainstorming" [shape=box];
     "Might any skill apply?" [shape=diamond];
     "Select skill from in-session list" [shape=box];
     "Announce/declare: Skills used: <...>. Mappings/fallbacks: <...>. Using [skill] to [purpose]." [shape=box];
@@ -40,7 +44,12 @@ digraph skill_flow {
     "Follow skill exactly" [shape=box];
     "Respond (including clarifications)" [shape=doublecircle];
 
-    "User message received" -> "Might any skill apply?";
+    "User message received" -> "In Plan collaboration mode?";
+    "In Plan collaboration mode?" -> "Already brainstormed?" [label="yes"];
+    "In Plan collaboration mode?" -> "Might any skill apply?" [label="no"];
+    "Already brainstormed?" -> "Invoke superpowers-brainstorming" [label="no"];
+    "Already brainstormed?" -> "Might any skill apply?" [label="yes"];
+    "Invoke superpowers-brainstorming" -> "Might any skill apply?";
     "Might any skill apply?" -> "Select skill from in-session list" [label="yes, even 1%"];
     "Might any skill apply?" -> "Respond (including clarifications)" [label="definitely not"];
     "Select skill from in-session list" -> "Announce/declare: Skills used: <...>. Mappings/fallbacks: <...>. Using [skill] to [purpose].";
