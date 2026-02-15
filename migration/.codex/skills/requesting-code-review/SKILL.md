@@ -78,6 +78,8 @@ Use template at `reviewer-prompt.md`, fill placeholders:
 
 **2.5 Present the filled prompt to Felix to copy/paste into a new thread:**
 - Provide the fully filled prompt text directly in chat.
+- Do not wrap the entire prompt in an outer triple-backtick code fence.
+- If you must wrap the entire prompt in a code fence, use four backticks so any triple-backtick content inside remains visible.
 - Instruct Felix to paste it into a new Codex thread/agent.
 
 **3. Process reviewer feedback:**

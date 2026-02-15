@@ -26,8 +26,6 @@ Review context worktree: <path to worktree folder if used>
 **Base:** `{BASE_SHA}`
 **Head:** `{HEAD_SHA}`
 
-```bash
-git diff --stat {BASE_SHA}..{HEAD_SHA}
-git diff {BASE_SHA}..{HEAD_SHA}
-```
-
+Run:
+- `git diff --stat {BASE_SHA}..{HEAD_SHA}`
+- `git diff {BASE_SHA}..{HEAD_SHA}`

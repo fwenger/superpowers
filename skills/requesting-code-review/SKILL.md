@@ -32,6 +32,8 @@ HEAD_SHA=$(git rev-parse HEAD)
 **2. Dispatch code-reviewer subagent:**
 
 Use Task tool with superpowers:code-reviewer type, fill template at `code-reviewer.md`
+- Do not wrap the entire filled prompt in an outer triple-backtick code fence.
+- If you must wrap the full prompt in a fence, use four backticks.
 
 **Placeholders:**
 - `{WHAT_WAS_IMPLEMENTED}` - What you just built
