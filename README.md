@@ -51,23 +51,6 @@ In Cursor Agent chat, install from marketplace:
 /plugin-add superpowers
 ```
 
-### Verify Installation
-
-Start a new session in Claude or Cursor and ask for something that should trigger a skill (for example, "help me plan this feature" or "let's debug this issue"). The agent should automatically invoke the relevant superpowers skill.
-
-In Claude Code, you can also check that commands appear:
-
-```bash
-/help
-```
-
-```
-# Should see:
-# /superpowers:brainstorm - Interactive design refinement
-# /superpowers:write-plan - Create implementation plan
-# /superpowers:execute-plan - Execute plan in batches
-```
-
 ### Codex
 
 Tell Codex:
@@ -87,6 +70,23 @@ Fetch and follow instructions from https://raw.githubusercontent.com/obra/superp
 ```
 
 **Detailed docs:** [docs/README.opencode.md](docs/README.opencode.md)
+
+### Verify Installation
+
+Start a new session in your chosen platform and ask for something that should trigger a skill (for example, "help me plan this feature" or "let's debug this issue"). The agent should automatically invoke the relevant superpowers skill.
+
+In Claude Code, you can also check that commands appear:
+
+```bash
+/help
+```
+
+```
+# Should see:
+# /superpowers:brainstorm - Interactive design refinement
+# /superpowers:write-plan - Create implementation plan
+# /superpowers:execute-plan - Execute plan in batches
+```
 
 ## The Basic Workflow
 
