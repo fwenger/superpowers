@@ -75,6 +75,7 @@ Use template at `reviewer-prompt.md`, fill placeholders:
 - `{BASE_SHA}` - Starting commit
 - `{HEAD_SHA}` - Ending commit
 - `{DESCRIPTION}` - Brief summary
+- `{WORKTREE_PATH_OR_NA}` - Worktree path or `N/A`
 
 **2.5 Present the filled prompt to Felix to copy/paste into a new thread:**
 - Present the fully filled prompt in exactly one fenced code block.

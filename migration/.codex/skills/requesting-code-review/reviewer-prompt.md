@@ -17,7 +17,7 @@ You are the reviewer agent. Use the skill superpowers-code-review. Review these 
 
 ## Worktree (if relevant)
 
-Review context worktree: <path to worktree folder if used>
+Review context worktree: {WORKTREE_PATH_OR_NA}
 
 ## Git Range to Review
 

@@ -119,4 +119,5 @@ After saving the plan, first verify whether true delegation/subagent capability 
 - **REQUIRED SUB-SKILL:** New session uses superpowers-executing-plans
 - Use `parallel-session-implementer-prompt.md` as the source template.
 - Output one fenced code block containing the fully filled implementer prompt.
+- Ensure the prompt has no unresolved placeholders.
 - Include design document path, plan path, branch, worktree, and relevant commits.
