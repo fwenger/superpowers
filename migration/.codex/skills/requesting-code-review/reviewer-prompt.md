@@ -1,5 +1,3 @@
-# Reviewer Prompt
-
 You are the reviewer agent. Use the skill superpowers-code-review. Review these completed changes for production readiness.
 
 **Your task:**
