@@ -117,3 +117,6 @@ After saving the plan, first verify whether true delegation/subagent capability 
 **If Parallel Session chosen:**
 - Guide them to open new session in worktree
 - **REQUIRED SUB-SKILL:** New session uses superpowers-executing-plans
+- Use `parallel-session-implementer-prompt.md` as the source template.
+- Output one fenced code block containing the fully filled implementer prompt.
+- Include design document path, plan path, branch, worktree, and relevant commits.
