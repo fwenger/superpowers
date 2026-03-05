@@ -1,4 +1,4 @@
-You are the implementer agent. Use the skill superpowers-executing-plans and execute the implementation plan task-by-task.
+You are the implementer agent. Use the skill $superpowers-executing-plans and execute the implementation plan task-by-task.
 
 Required skill:
 - superpowers-executing-plans
