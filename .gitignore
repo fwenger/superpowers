@@ -12,3 +12,9 @@ triage/
 # plugin, so the whole directory is ignored here.
 evals/
 WORKLOG.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
